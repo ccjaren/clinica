@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DentalLuz - Odontología</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF8F3;
+    --mint: #D4EDE4;
+    --deep-teal: #1A5C4A;
+    --mid-teal: #2E8B6B;
+    --light-teal: #5BB89A;
+    --gold: #C8A96E;
+    --text-dark: #1C1C1C;
+    --text-mid: #4A4A4A;
+    --text-light: #7A7A7A;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(250,248,243,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212,237,228,0.6);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--deep-teal);
+    letter-spacing: 0.02em;
+  }
+
+  .logo span { color: var(--gold); }
+
+  nav ul {
+    list-style: none;
+    display: flex; gap: 2.5rem;
+  }
+
+  nav ul a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--deep-teal); }
+
+  .nav-cta {
+    background: var(--deep-teal);
+    color: var(--white) !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 2rem;
+  }
+
+  .nav-cta:hover { background: var(--mid-teal); color: var(--white) !important; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 7rem 3rem 4rem;
+    gap: 3rem;
+  }
+
+  .hero-text { max-width: 540px; }
+
+  .hero-eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px; height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4.2rem;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--deep-teal);
+    margin-bottom: 1.4rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-mid);
+    margin-bottom: 2.4rem;
+    max-width: 420px;
+  }
+
+  .btn-group { display: flex; gap: 1rem; align-items: center; }
+
+  .btn-primary {
+    background: var(--deep-teal);
+    color: var(--white);
+    padding: 0.9rem 2rem;
+    border-radius: 3rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--mid-teal); transform: translateY(-1px); }
+
+  .btn-ghost {
+    color: var(--deep-teal);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: gap 0.2s;
+  }
+
+  .btn-ghost:hover { gap: 0.7rem; }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-card {
+    background: var(--white);
+    border-radius: 2rem;
+    padding: 3rem 2.5rem;
+    width: 380px;
+    box-shadow: 0 40px 80px rgba(26,92,74,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--deep-teal), var(--gold));
+  }
+
+  .card-icon {
+    width: 64px; height: 64px;
+    background: var(--mint);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-icon svg { width: 30px; height: 30px; }
+
+  .hero-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--deep-teal);
+    margin-bottom: 0.7rem;
+  }
+
+  .hero-card p {
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .rating {
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+
+  .stars { color: var(--gold); font-size: 1rem; }
+
+  .rating-text { font-size: 0.82rem; color: var(--text-light); }
+
+  .float-badge {
+    position: absolute;
+    bottom: -1.5rem; right: -1.5rem;
+    background: var(--deep-teal);
+    color: var(--white);
+    border-radius: 1rem;
+    padding: 1rem 1.3rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(26,92,74,0.3);
+  }
+
+  .float-badge .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .float-badge .label { font-size: 0.7rem; opacity: 0.8; }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--deep-teal);
+    color: var(--white);
+    padding: 2rem 3rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label { font-size: 0.8rem; opacity: 0.75; margin-top: 0.3rem; }
+
+  /* SERVICIOS */
+  #servicios {
+    padding: 6rem 3rem;
+    background: var(--white);
+  }
+
+  .section-header { text-align: center; margin-bottom: 4rem; }
+
+  .section-eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+    display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+  }
+
+  .section-eyebrow::before, .section-eyebrow::after {
+    content: '';
+    display: block;
+    width: 28px; height: 1px;
+    background: var(--gold);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--deep-teal);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    border: 1px solid rgba(212,237,228,0.8);
+    border-radius: 1.2rem;
+    padding: 2rem;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+
+  .service-card:hover {
+    border-color: var(--light-teal);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(26,92,74,0.08);
+  }
+
+  .service-card:hover .service-icon { background: var(--deep-teal); }
+  .service-card:hover .service-icon svg { color: var(--white); }
+
+  .service-icon {
+    width: 52px; height: 52px;
+    background: var(--mint);
+    border-radius: 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+    transition: background 0.25s;
+  }
+
+  .service-icon svg {
+    width: 24px; height: 24px;
+    color: var(--deep-teal);
+    transition: color 0.25s;
+  }
+
+  .service-card h4 {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 0.6rem;
+  }
+
+  .service-card p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+
+  /* EQUIPO */
+  #equipo {
+    padding: 6rem 3rem;
+    background: var(--cream);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .team-card {
+    background: var(--white);
+    border-radius: 1.2rem;
+    overflow: hidden;
+    border: 1px solid rgba(212,237,228,0.5);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .team-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(26,92,74,0.08); }
+
+  .team-avatar {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+  }
+
+  .team-info { padding: 1.5rem; }
+
+  .team-info h4 {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .team-info .specialty {
+    font-size: 0.82rem;
+    color: var(--mid-teal);
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+
+  .team-info p {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+
+  /* TESTIMONIOS */
+  #testimonios {
+    padding: 6rem 3rem;
+    background: var(--deep-teal);
+    color: var(--white);
+  }
+
+  #testimonios .section-eyebrow { color: var(--gold); }
+  #testimonios .section-eyebrow::before, #testimonios .section-eyebrow::after { background: var(--gold); }
+  #testimonios h2 { color: var(--white); }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .testimonial {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1.2rem;
+    padding: 2rem;
+  }
+
+  .testimonial .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    color: var(--gold);
+    line-height: 0.8;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    opacity: 0.85;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-author {
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+
+  .author-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--deep-teal);
+  }
+
+  .author-name { font-size: 0.88rem; font-weight: 500; }
+  .author-since { font-size: 0.75rem; opacity: 0.55; }
+
+  /* CTA */
+  #cita {
+    padding: 6rem 3rem;
+    background: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .cta-text h2 { text-align: left; margin-bottom: 1rem; }
+
+  .cta-text p {
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+
+  .contact-row {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-size: 0.88rem;
+    color: var(--text-mid);
+  }
+
+  .contact-icon {
+    width: 36px; height: 36px;
+    background: var(--mint);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cta-form {
+    background: var(--cream);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+  }
+
+  .cta-form h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--deep-teal);
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group { margin-bottom: 1rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 0.4rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--white);
+    border: 1px solid rgba(212,237,228,0.8);
+    border-radius: 0.6rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus { border-color: var(--mid-teal); }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--deep-teal);
+    color: var(--white);
+    border: none;
+    padding: 0.95rem;
+    border-radius: 3rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover { background: var(--mid-teal); transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer {
+    background: #0F3A2D;
+    color: rgba(255,255,255,0.7);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .footer-brand .logo { color: var(--mint); margin-bottom: 1rem; display: block; }
+
+  .footer-brand p { font-size: 0.84rem; line-height: 1.65; max-width: 240px; }
+
+  footer h5 {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+  footer ul li a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    transition: color 0.2s;
+  }
+
+  footer ul li a:hover { color: var(--white); }
+
+  .footer-bottom {
+    background: #0A2A20;
+    padding: 1.2rem 3rem;
+    text-align: center;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-text { animation: fadeUp 0.7s ease both; }
+  .hero-visual { animation: fadeUp 0.7s 0.15s ease both; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Dental<span>Luz</span></div>
+  <ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#cita" class="nav-cta">Reservar cita</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Odontología de excelencia</div>
+    <h1>Tu sonrisa<br>es nuestra <em>pasión</em></h1>
+    <p class="hero-desc">Cuidado dental personalizado con tecnología de vanguardia y un equipo de especialistas comprometidos con tu bienestar.</p>
+    <div class="btn-group">
+      <a href="#cita" class="btn-primary">Reservar cita</a>
+      <a href="#servicios" class="btn-ghost">Ver servicios →</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--deep-teal)">
+          <path d="M12 2C8 2 5 5 5 9c0 2 .5 3.5 1 5l1 6c.3 1.5 1 2 2 2h2l1-4 1 4h2c1 0 1.7-.5 2-2l1-6c.5-1.5 1-3 1-5 0-4-3-7-7-7z"/>
+        </svg>
+      </div>
+      <h3>Primera consulta gratis</h3>
+      <p>Evaluación completa sin costo para nuevos pacientes. Diagnóstico digital y plan de tratamiento personalizado.</p>
+      <div class="rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-text">4.9/5 · más de 800 reseñas</span>
+      </div>
+    </div>
+    <div class="float-badge">
+      <div class="num">15+</div>
+      <div class="label">años de experiencia</div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div>
+    <div class="stat-num">12,000+</div>
+    <div class="stat-label">Pacientes atendidos</div>
+  </div>
+  <div>
+    <div class="stat-num">98%</div>
+    <div class="stat-label">Satisfacción</div>
+  </div>
+  <div>
+    <div class="stat-num">8</div>
+    <div class="stat-label">Especialistas</div>
+  </div>
+  <div>
+    <div class="stat-num">15+</div>
+    <div class="stat-label">Años de experiencia</div>
+  </div>
+</div>
+
+<section id="servicios">
+  <div class="section-header">
+    <div class="section-eyebrow">Lo que hacemos</div>
+    <h2>Nuestros servicios</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
+      <h4>Limpieza y prevención</h4>
+      <p>Higiene dental profesional, profilaxis y sellantes para mantener tu salud bucal en óptimas condiciones.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/>
+        </svg>
+      </div>
+      <h4>Blanqueamiento dental</h4>
+      <p>Tratamientos de blanqueamiento en clínica y en casa para una sonrisa radiante y natural.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="8" width="18" height="13" rx="2"/><path d="M16 8V6a4 4 0 0 0-8 0v2"/>
+        </svg>
+      </div>
+      <h4>Ortodoncia</h4>
+      <p>Brackets tradicionales, metálicos y alineadores transparentes para corregir la posición de tus dientes.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      </div>
+      <h4>Implantes dentales</h4>
+      <p>Soluciones permanentes de alta calidad para reemplazar dientes perdidos con naturalidad y funcionalidad.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+        </svg>
+      </div>
+      <h4>Estética dental</h4>
+      <p>Carillas, coronas y diseño de sonrisa para transformar tu imagen con resultados naturales y duraderos.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        </svg>
+      </div>
+      <h4>Endodoncia</h4>
+      <p>Tratamientos de conducto con técnicas modernas y mínimo dolor para salvar tus dientes naturales.</p>
+    </div>
+  </div>
+</section>
+
+<section id="equipo">
+  <div class="section-header">
+    <div class="section-eyebrow">Profesionales</div>
+    <h2>Nuestro equipo</h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar" style="background: var(--mint); color: var(--deep-teal);">DM</div>
+      <div class="team-info">
+        <h4>Dra. Mariana Torres</h4>
+        <div class="specialty">Directora · Estética Dental</div>
+        <p>Especialista en diseño de sonrisa y rehabilitación oral con más de 12 años de experiencia clínica.</p>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: #E8F4FD; color: #1A5C8C;">DR</div>
+      <div class="team-info">
+        <h4>Dr. Rodrigo Mendez</h4>
+        <div class="specialty">Implantología</div>
+        <p>Experto en implantes osteointegrados y cirugía oral con formación en España y México.</p>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: #FEF3E7; color: #8C5A1A;">DC</div>
+      <div class="team-info">
+        <h4>Dra. Camila Rojas</h4>
+        <div class="specialty">Ortodoncia</div>
+        <p>Especialista en ortodoncia invisible y tratamientos con brackets. Miembro de la Sociedad de Ortodoncia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonios">
+  <div class="section-header">
+    <div class="section-eyebrow">Lo que dicen nuestros pacientes</div>
+    <h2>Testimonios</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <div class="quote-mark">"</div>
+      <p>Después de años con miedo al dentista, encontré en DentalLuz un lugar donde me siento tranquila y en confianza. El resultado de mi blanqueamiento fue increíble.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">LP</div>
+        <div>
+          <div class="author-name">Laura Pérez</div>
+          <div class="author-since">Paciente desde 2021</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="quote-mark">"</div>
+      <p>Me realizaron dos implantes y la experiencia fue mucho mejor de lo esperado. El equipo es muy profesional y siempre te explican cada paso del tratamiento.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">JM</div>
+        <div>
+          <div class="author-name">Jorge Medina</div>
+          <div class="author-since">Paciente desde 2020</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="quote-mark">"</div>
+      <p>Mi hija lleva ortodoncia invisible y los cambios en solo 6 meses han sido notables. La Dra. Camila es excelente y muy paciente. Totalmente recomendados.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SV</div>
+        <div>
+          <div class="author-name">Sandra Vargas</div>
+          <div class="author-since">Paciente desde 2022</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cita">
+  <div class="cta-text">
+    <div class="section-eyebrow" style="justify-content: flex-start;">Escríbenos</div>
+    <h2>Agenda tu cita hoy</h2>
+    <p>Estamos listos para atenderte. Contáctanos por cualquier canal o reserva directamente en el formulario.</p>
+    <div class="contact-info">
+      <div class="contact-row">
+        <div class="contact-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--deep-teal)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.15 3.18 2 2 0 0 1 3.12 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
+        </div>
+        <span>+51 987 654 321</span>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--deep-teal)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <span>contacto@dentalluz.pe</span>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--deep-teal)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <span>Av. Salaverry 2345, San Isidro, Lima</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta-form">
+    <h3>Reserva tu cita</h3>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label>Teléfono</label>
+        <input type="tel" placeholder="+51 ···">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Servicio</label>
+      <select>
+        <option>Selecciona un servicio</option>
+        <option>Limpieza y prevención</option>
+        <option>Blanqueamiento</option>
+        <option>Ortodoncia</option>
+        <option>Implantes</option>
+        <option>Estética dental</option>
+        <option>Endodoncia</option>
+        <option>Primera consulta (gratis)</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Fecha preferida</label>
+        <input type="date">
+      </div>
+      <div class="form-group">
+        <label>Horario</label>
+        <select>
+          <option>Mañana (8–12h)</option>
+          <option>Tarde (12–17h)</option>
+          <option>Tarde-noche (17–20h)</option>
+        </select>
+      </div>
+    </div>
+    <button class="form-submit">Solicitar cita</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <span class="logo">Dental<span style="color:var(--gold)">Luz</span></span>
+    <p>Más de 15 años brindando atención dental de calidad en Lima. Tu salud bucal es nuestra prioridad.</p>
+  </div>
+  <div>
+    <h5>Servicios</h5>
+    <ul>
+      <li><a href="#">Limpieza dental</a></li>
+      <li><a href="#">Blanqueamiento</a></li>
+      <li><a href="#">Ortodoncia</a></li>
+      <li><a href="#">Implantes</a></li>
+      <li><a href="#">Estética</a></li>
+    </ul>
+  </div>
+  <div>
+    <h5>Clínica</h5>
+    <ul>
+      <li><a href="#">Sobre nosotros</a></li>
+      <li><a href="#">Nuestro equipo</a></li>
+      <li><a href="#">Blog dental</a></li>
+      <li><a href="#">Convenios</a></li>
+    </ul>
+  </div>
+  <div>
+    <h5>Horarios</h5>
+    <ul>
+      <li><a href="#">Lun–Vie: 8am–8pm</a></li>
+      <li><a href="#">Sábado: 8am–2pm</a></li>
+      <li><a href="#">Emergencias 24h</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">© 2025 DentalLuz · Todos los derechos reservados</div>
+
+<script>
+  document.querySelector('.form-submit').addEventListener('click', function() {
+    const name = document.querySelector('input[type=text]').value;
+    if (name.trim()) {
+      this.textContent = '¡Cita solicitada! Te contactaremos pronto.';
+      this.style.background = '#2E8B6B';
+      this.disabled = true;
+    } else {
+      this.textContent = 'Ingresa tu nombre para continuar';
+      setTimeout(() => { this.textContent = 'Solicitar cita'; }, 2000);
+    }
+  });
+</script>
+</body>
+</html>
